@@ -1,4 +1,5 @@
 import requests
+# collectors パッケージ内の base.py から EconomicDocumentCollector をインポート
 from collectors.base import EconomicDocumentCollector
 
 class IMFCollector(EconomicDocumentCollector):
@@ -26,6 +27,18 @@ class USFedCollector(EconomicDocumentCollector):
         print("    [Direct] US FED Check...")
         docs = [{"title": "Beige Book - Feb 2026", "date": "2026-02-05", "url": "https://www.federalreserve.gov/monetarypolicy/beigebook202602.htm", "category": "Monetary"}]
         for d in docs: self.save_metadata(f"fed_{d['date'].replace('-', '')}", d)
+        return len(docs)
+
+class IEACollector(EconomicDocumentCollector):
+    def __init__(self):
+        super().__init__("INT", "IEA")
+    def fetch_latest_documents(self):
+        print("    [Direct] IEA Check...")
+        docs = [
+            {"title": "World Energy Outlook 2024", "date": "2024-10-16", "url": "https://www.iea.org/reports/world-energy-outlook-2024", "category": "Energy"},
+            {"title": "Renewables 2024", "date": "2024-10-01", "url": "https://www.iea.org/reports/renewables-2024", "category": "Energy"}
+        ]
+        for i, d in enumerate(docs): self.save_metadata(f"iea_{d['date'].replace('-', '')}_{i}", d)
         return len(docs)
 
 class OECDCollector(EconomicDocumentCollector):
@@ -64,7 +77,9 @@ class BOJCollector(EconomicDocumentCollector):
         for d in docs: self.save_metadata(f"boj_{d['date'].replace('-', '')}", d)
         return len(docs)
 
+# 実行リスト
 STABLE_COLLECTORS = [
     IMFCollector, JapanMOFCollector, USFedCollector, 
-    OECDCollector, WorldBankCollector, ECBCollector, BOJCollector
+    IEACollector, OECDCollector, WorldBankCollector, 
+    ECBCollector, BOJCollector
 ]
