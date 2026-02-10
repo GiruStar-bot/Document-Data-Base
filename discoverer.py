@@ -1,41 +1,70 @@
 import json
 import requests
+import time
 
 class SourceDiscoverer:
     """
-    Gemini APIを使用して、世界中の経済機関の公式サイトを自動探索するクラス。
+    Gemini APIを使用して、インターネットから新しい経済文書のソース（公式サイト）を探索するクラス。
     """
     def __init__(self):
-        self.api_key = "" # Runtime provides this
+        self.api_key = "" # 実行環境から自動提供されます
+        self.model = "gemini-2.5-flash-preview-09-2025"
+        self.url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
+
+    def _call_gemini(self, prompt, system_instruction):
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "systemInstruction": {"parts": [{"text": system_instruction}]},
+            "tools": [{"google_search": {}}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "responseSchema": {
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "id": {"type": "STRING"},
+                            "country": {"type": "STRING"},
+                            "org": {"type": "STRING"},
+                            "url": {"type": "STRING"},
+                            "category": {"type": "STRING"}
+                        },
+                        "required": ["id", "country", "org", "url", "category"]
+                    }
+                }
+            }
+        }
+
+        for i in range(5):
+            try:
+                response = requests.post(self.url, json=payload)
+                if response.status_code == 200:
+                    result = response.json()
+                    text = result['candidates'][0]['content']['parts'][0]['text']
+                    return json.loads(text)
+                time.sleep(2**i) # 指数バックオフ: 1s, 2s, 4s, 8s, 16s
+            except Exception:
+                time.sleep(2**i)
+        return []
 
     def search_new_sources(self, existing_sources):
         existing_orgs = [s['org'] for s in existing_sources]
+        system_instruction = "あなたは世界中の公的経済文書（官報、予算書、中央銀行レポート）を収集する専門家です。指定された形式のJSON配列のみを返してください。"
         
-        # Geminiに未知の経済機関を探させるプロンプト
         prompt = f"""
-        現在、以下の組織の経済文書を収集しています: {', '.join(existing_orgs)}。
-        これら以外の国（例えばアフリカ、東南アジア、南米など）の
-        主要な財務省または中央銀行の「経済報告書ページ」のURLを3つ探してください。
-        以下のJSON形式で回答してください:
-        [
-            {{"id": "unique_id", "country": "ISO3コード", "org": "組織略称", "url": "URL", "category": "Economic"}}
-        ]
+        現在、以下の組織を追跡しています: {', '.join(existing_orgs)}。
+        これら以外の、まだ登録されていない国の「財務省(Ministry of Finance)」または「中央銀行(Central Bank)」の
+        公式な「経済報告書（Reports/Publications）ページ」のURLを3つ新しく見つけてください。
+        特にアジア、アフリカ、ヨーロッパの国を優先してください。
         """
 
-        try:
-            # Gemini API呼び出し (Google Search Groundingを使用)
-            # 実際の実装ではここで API への POST を行います
-            # 今回はコンセプト実証として、AIが提案するであろう形式をシミュレート
-            print("  Searching for new economic sources via Gemini...")
-            
-            # API連携の疑似コード (実際には fetch 等でリクエスト)
-            # new_found = self._call_gemini_api(prompt)
-            
-            # 擬似的な新規発見データ
-            return [
-                {"id": "de_bundesbank", "country": "DEU", "org": "Bundesbank", "url": "https://www.bundesbank.de/en/publications/reports", "category": "Monetary"},
-                {"id": "uk_hmt", "country": "GBR", "org": "HMT", "url": "https://www.gov.uk/government/organisations/hm-treasury", "category": "Budget"}
-            ]
-        except Exception as e:
-            print(f"  Discovery failed: {e}")
-            return []
+        print("  [AI] Searching the web for new economic sources...")
+        new_sources = self._call_gemini(prompt, system_instruction)
+        
+        # 重複チェック
+        unique_new_sources = []
+        for ns in new_sources:
+            if ns['url'] not in [s['url'] for s in existing_sources]:
+                unique_new_sources.append(ns)
+        
+        return unique_new_sources
