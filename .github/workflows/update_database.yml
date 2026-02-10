@@ -1,3 +1,16 @@
+name: Update Public Document Database
+
+on:
+workflow_dispatch:
+schedule:
+- cron: '0 0 * * *'
+
+jobs:
+build:
+runs-on: ubuntu-latest
+permissions:
+contents: write
+
 steps:
   - name: Checkout repository
     uses: actions/checkout@v4
