@@ -2,18 +2,20 @@ name: Update Public Document Database
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 毎日0時に自動実行
-  workflow_dispatch: # 手動実行も可能
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # リポジトリへの書き込み権限を許可（重要）
+      contents: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -21,17 +23,18 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: pip install requests
 
-      - name: Run data collection script
+      - name: Run Autonomy Script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} # ここでGitHubのSecretをPythonに渡す
         run: python main.py
 
-      - name: Commit and push changes
+      - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/
-          git add collectors/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: New sources and documents discovered by AI" && git push)
+          git add data/ collectors/
+          # 常に status.json が更新されるので、必ずコミットが発生します
+          git commit -m "Auto-growth: AI discovery and index update" || echo "No changes to commit"
+          git push origin main
