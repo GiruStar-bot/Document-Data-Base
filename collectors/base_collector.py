@@ -5,69 +5,106 @@ import time
 from datetime import datetime
 
 class GenericEconomicCollector:
+    """
+    世界各国の経済文書を収集し、インデックスを生成するクラス。
+    """
     def __init__(self, country_code, organization_name, target_url=""):
         self.country_code = country_code
         self.organization_name = organization_name
         self.target_url = target_url
+        
+        # APIキー取得
         self.api_key = os.getenv("GEMINI_API_KEY", "") 
         self.model = "gemini-2.5-flash-preview-09-2025"
         self.api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
         
-        self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.data_dir = os.path.join(self.base_dir, "data")
+        # 基準ディレクトリを「リポジトリのルート」に固定
+        self.root_dir = os.getcwd()
+        self.data_dir = os.path.join(self.root_dir, "data")
         self.save_dir = os.path.join(self.data_dir, country_code, organization_name)
-        os.makedirs(self.save_dir, exist_ok=True)
+        
+        if not os.path.exists(self.save_dir):
+            os.makedirs(self.save_dir, exist_ok=True)
 
     def fetch_latest_documents(self):
+        """AIを使用して文書を抽出"""
         if not self.target_url or not self.api_key:
             return 0
 
+        print(f"    [AI] Analyzing {self.organization_name}...")
         try:
             headers = {'User-Agent': 'Mozilla/5.0'}
             res = requests.get(self.target_url, headers=headers, timeout=15)
-            html = res.text[:4000] # 文字数をさらに絞ってトークン節約
+            html = res.text[:5000]
         except: return 0
 
-        # プロンプトを短くしてトークン節約
         payload = {
             "contents": [{"parts": [{"text": f"Extract 2 PDF links as JSON array from HTML. URL: {self.target_url}\nHTML: {html}"}]}],
             "generationConfig": {"responseMimeType": "application/json"}
         }
 
+        count = 0
         try:
             r = requests.post(self.api_url, json=payload, timeout=30)
-            if r.status_code == 429:
-                raise Exception("429: API Quota Exhausted")
-            
             if r.status_code == 200:
                 docs = json.loads(r.json()['candidates'][0]['content']['parts'][0]['text'])
-                count = 0
                 for doc in docs:
-                    doc_id = f"doc_{int(time.time())}_{count}"
+                    # タイトルからファイル名に使用できない文字を除去
+                    safe_title = "".join(x for x in doc.get('title', 'doc') if x.isalnum())[:20]
+                    doc_id = f"{safe_title}_{int(time.time())}"
                     self.save_metadata(doc_id, doc)
                     count += 1
-                return count
         except Exception as e:
-            if "429" in str(e): raise e # 429はmainに伝播させる
             print(f"      Error: {e}")
-        return 0
+        return count
 
     def save_metadata(self, doc_id, metadata):
-        metadata.update({"country": self.country_code, "organization": self.organization_name, "collected_at": datetime.now().isoformat()})
+        """メタデータを個別のJSONとして保存"""
+        metadata.update({
+            "country": self.country_code,
+            "organization": self.organization_name,
+            "collected_at": datetime.now().isoformat(),
+            "doc_id": doc_id
+        })
         path = os.path.join(self.save_dir, f"{doc_id}.json")
         with open(path, "w", encoding="utf-8") as f:
             json.dump(metadata, f, ensure_ascii=False, indent=4)
 
-    def generate_master_index(self):
+    @staticmethod
+    def generate_master_index():
+        """
+        静的メソッドとして定義し、全JSONを集約します。
+        """
+        root_dir = os.getcwd()
+        data_dir = os.path.join(root_dir, "data")
         all_data = []
-        for root, _, files in os.walk(self.data_dir):
+        
+        print(f"  [Index] Starting scan in: {data_dir}")
+        
+        if not os.path.exists(data_dir):
+            print(f"  [Error] Data directory not found at {data_dir}")
+            return
+
+        # フォルダ内を再帰的に探索
+        for root, _, files in os.walk(data_dir):
             for file in files:
+                # master_index.json と status.json は除外
                 if file.endswith(".json") and file not in ["master_index.json", "status.json"]:
+                    file_path = os.path.join(root, file)
                     try:
-                        with open(os.path.join(root, file), "r", encoding="utf-8") as f:
+                        with open(file_path, "r", encoding="utf-8") as f:
                             d = json.load(f)
-                            if isinstance(d, dict): all_data.append(d)
-                    except: continue
+                            if isinstance(d, dict):
+                                all_data.append(d)
+                    except Exception as e:
+                        print(f"  [Skip] Failed to load {file}: {e}")
+
+        # 日付で降順ソート
         all_data.sort(key=lambda x: str(x.get("date", "")), reverse=True)
-        with open(os.path.join(self.data_dir, "master_index.json"), "w", encoding="utf-8") as f:
+
+        # 書き出し
+        index_path = os.path.join(data_dir, "master_index.json")
+        with open(index_path, "w", encoding="utf-8") as f:
             json.dump(all_data, f, ensure_ascii=False, indent=4)
+        
+        print(f"  [Success] Master index updated with {len(all_data)} items at {index_path}")
