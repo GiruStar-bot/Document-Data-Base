@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Official Update: Regulatory Framework 2025-49",
+    "url": "https://gov.pk/announcements/31034",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of pk regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.576198"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-28",
+    "url": "https://gov.pk/announcements/54787",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of pk regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.576209"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-43",
+    "url": "https://gov.pk/announcements/87055",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of pk regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.576204"
+  }
+]

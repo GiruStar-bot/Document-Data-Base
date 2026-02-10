@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Official Update: Regulatory Framework 2026-36",
+    "url": "https://gov.ru/announcements/98716",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of ru regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.579631"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-19",
+    "url": "https://gov.ru/announcements/99484",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of ru regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.579624"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-1",
+    "url": "https://gov.ru/announcements/66395",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of ru regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.579635"
+  }
+]

@@ -1,0 +1,892 @@
+[
+  {
+    "title": "Official Update: Regulatory Framework 2025-3",
+    "url": "https://gov.sg/announcements/62567",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of sg regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.576026",
+    "country_code": "sg",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-14",
+    "url": "https://gov.sg/announcements/83714",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of sg regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.576031",
+    "country_code": "sg",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-23",
+    "url": "https://gov.hk/announcements/55575",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of hk regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.577423",
+    "country_code": "hk",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-13",
+    "url": "https://gov.fi/announcements/96405",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of fi regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.579097",
+    "country_code": "fi",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-21",
+    "url": "https://gov.ug/announcements/73885",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of ug regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.583304",
+    "country_code": "ug",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-5",
+    "url": "https://gov.tz/announcements/95131",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of tz regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.583146",
+    "country_code": "tz",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-17",
+    "url": "https://gov.za/announcements/88235",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of za regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.582032",
+    "country_code": "za",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-22",
+    "url": "https://gov.co/announcements/55914",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of co regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.581520",
+    "country_code": "co",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-19",
+    "url": "https://gov.us/announcements/97679",
+    "date": "2026-02-10",
+    "summary": "Public notification from the government of us regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.580638",
+    "country_code": "us",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-12",
+    "url": "https://gov.sa/announcements/77672",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of sa regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.576749",
+    "country_code": "sa",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-49",
+    "url": "https://gov.fi/announcements/17434",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of fi regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.579093",
+    "country_code": "fi",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-36",
+    "url": "https://gov.ru/announcements/98716",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of ru regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.579631",
+    "country_code": "ru",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-43",
+    "url": "https://gov.cz/announcements/46958",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of cz regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.580276",
+    "country_code": "cz",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-45",
+    "url": "https://gov.es/announcements/15373",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of es regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.578128",
+    "country_code": "es",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-28",
+    "url": "https://gov.gr/announcements/40299",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of gr regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.579943",
+    "country_code": "gr",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-28",
+    "url": "https://gov.gh/announcements/66554",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of gh regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.582703",
+    "country_code": "gh",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-16",
+    "url": "https://gov.dz/announcements/63789",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of dz regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.582996",
+    "country_code": "dz",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-14",
+    "url": "https://gov.dz/announcements/76482",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of dz regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.583002",
+    "country_code": "dz",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-18",
+    "url": "https://gov.cl/announcements/52389",
+    "date": "2026-02-09",
+    "summary": "Public notification from the government of cl regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.581358",
+    "country_code": "cl",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-38",
+    "url": "https://gov.kr/announcements/16308",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of kr regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.574937",
+    "country_code": "kr",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-49",
+    "url": "https://gov.pk/announcements/31034",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of pk regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.576198",
+    "country_code": "pk",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-28",
+    "url": "https://gov.pk/announcements/54787",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of pk regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.576209",
+    "country_code": "pk",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-36",
+    "url": "https://gov.in/announcements/43768",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of in regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.575104",
+    "country_code": "in",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-27",
+    "url": "https://gov.hk/announcements/23415",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of hk regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.577419",
+    "country_code": "hk",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-18",
+    "url": "https://gov.ie/announcements/84636",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of ie regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.580420",
+    "country_code": "ie",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-6",
+    "url": "https://gov.ie/announcements/88381",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of ie regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.580426",
+    "country_code": "ie",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-47",
+    "url": "https://gov.it/announcements/17898",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of it regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.577941",
+    "country_code": "it",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-32",
+    "url": "https://gov.it/announcements/93666",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of it regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.577947",
+    "country_code": "it",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-15",
+    "url": "https://gov.fi/announcements/33577",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of fi regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.579087",
+    "country_code": "fi",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-25",
+    "url": "https://gov.be/announcements/38562",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of be regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.578410",
+    "country_code": "be",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-44",
+    "url": "https://gov.es/announcements/15922",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of es regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.578124",
+    "country_code": "es",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-48",
+    "url": "https://gov.dk/announcements/41136",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of dk regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.579263",
+    "country_code": "dk",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-46",
+    "url": "https://gov.ug/announcements/93191",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of ug regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.583300",
+    "country_code": "ug",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-46",
+    "url": "https://gov.eg/announcements/24913",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of eg regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.582276",
+    "country_code": "eg",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-34",
+    "url": "https://gov.eg/announcements/51593",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of eg regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.582282",
+    "country_code": "eg",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-5",
+    "url": "https://gov.cu/announcements/47596",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of cu regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.581873",
+    "country_code": "cu",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-1",
+    "url": "https://gov.ca/announcements/76133",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of ca regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.580795",
+    "country_code": "ca",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-25",
+    "url": "https://gov.ca/announcements/87270",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of ca regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.580801",
+    "country_code": "ca",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-18",
+    "url": "https://gov.in/announcements/77186",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of in regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.575109",
+    "country_code": "in",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-40",
+    "url": "https://gov.th/announcements/68889",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of th regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.575423",
+    "country_code": "th",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-27",
+    "url": "https://gov.ua/announcements/77728",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of ua regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.579793",
+    "country_code": "ua",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-48",
+    "url": "https://gov.it/announcements/76080",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of it regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.577952",
+    "country_code": "it",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-27",
+    "url": "https://gov.pl/announcements/83883",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of pl regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.579417",
+    "country_code": "pl",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-22",
+    "url": "https://gov.gr/announcements/41192",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of gr regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.579954",
+    "country_code": "gr",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-32",
+    "url": "https://gov.ug/announcements/70593",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of ug regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.583294",
+    "country_code": "ug",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-16",
+    "url": "https://gov.ke/announcements/10746",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of ke regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.582432",
+    "country_code": "ke",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-34",
+    "url": "https://gov.ar/announcements/63296",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of ar regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.581218",
+    "country_code": "ar",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-39",
+    "url": "https://gov.id/announcements/33139",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of id regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.575265",
+    "country_code": "id",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-22",
+    "url": "https://gov.bd/announcements/52945",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of bd regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.576358",
+    "country_code": "bd",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-12",
+    "url": "https://gov.th/announcements/59801",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of th regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.575430",
+    "country_code": "th",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-6",
+    "url": "https://gov.th/announcements/93610",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of th regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.575434",
+    "country_code": "th",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-44",
+    "url": "https://gov.jp/announcements/24107",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of jp regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.574648",
+    "country_code": "jp",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-2",
+    "url": "https://gov.my/announcements/41260",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of my regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.575744",
+    "country_code": "my",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-37",
+    "url": "https://gov.no/announcements/65438",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of no regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.578934",
+    "country_code": "no",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-1",
+    "url": "https://gov.gh/announcements/92022",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of gh regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.582707",
+    "country_code": "gh",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-45",
+    "url": "https://gov.cl/announcements/10612",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of cl regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.581364",
+    "country_code": "cl",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-19",
+    "url": "https://gov.mx/announcements/54540",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of mx regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.580975",
+    "country_code": "mx",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-43",
+    "url": "https://gov.mx/announcements/31434",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of mx regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.580980",
+    "country_code": "mx",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-22",
+    "url": "https://gov.nz/announcements/14008",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of nz regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.583620",
+    "country_code": "nz",
+    "region": "oceania"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-44",
+    "url": "https://gov.ae/announcements/32531",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of ae regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.576971",
+    "country_code": "ae",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-7",
+    "url": "https://gov.my/announcements/74194",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of my regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.575751",
+    "country_code": "my",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-2",
+    "url": "https://gov.hk/announcements/61011",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of hk regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.577413",
+    "country_code": "hk",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-8",
+    "url": "https://gov.se/announcements/99365",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of se regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.578786",
+    "country_code": "se",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-28",
+    "url": "https://gov.se/announcements/92020",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of se regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.578792",
+    "country_code": "se",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-19",
+    "url": "https://gov.ru/announcements/99484",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of ru regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.579624",
+    "country_code": "ru",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-13",
+    "url": "https://gov.nl/announcements/46641",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of nl regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.578276",
+    "country_code": "nl",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-25",
+    "url": "https://gov.dk/announcements/30185",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of dk regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.579269",
+    "country_code": "dk",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-26",
+    "url": "https://gov.gr/announcements/99844",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of gr regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.579950",
+    "country_code": "gr",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-14",
+    "url": "https://gov.ma/announcements/49692",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of ma regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.582857",
+    "country_code": "ma",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-13",
+    "url": "https://gov.eg/announcements/76299",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of eg regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.582287",
+    "country_code": "eg",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-48",
+    "url": "https://gov.mx/announcements/89665",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of mx regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.580969",
+    "country_code": "mx",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-34",
+    "url": "https://gov.pg/announcements/69637",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of pg regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.584292",
+    "country_code": "pg",
+    "region": "oceania"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-25",
+    "url": "https://gov.nz/announcements/66627",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of nz regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.583616",
+    "country_code": "nz",
+    "region": "oceania"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-30",
+    "url": "https://gov.in/announcements/91631",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of in regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.575098",
+    "country_code": "in",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-1",
+    "url": "https://gov.ru/announcements/66395",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of ru regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.579635",
+    "country_code": "ru",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-47",
+    "url": "https://gov.ve/announcements/19090",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of ve regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.581743",
+    "country_code": "ve",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2026-10",
+    "url": "https://gov.nz/announcements/64263",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of nz regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.583609",
+    "country_code": "nz",
+    "region": "oceania"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-43",
+    "url": "https://gov.pk/announcements/87055",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of pk regarding regional updates.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:12:15.576204",
+    "country_code": "pk",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-44",
+    "url": "https://gov.sa/announcements/81707",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of sa regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.576743",
+    "country_code": "sa",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-49",
+    "url": "https://gov.ae/announcements/52082",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of ae regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.576965",
+    "country_code": "ae",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-1",
+    "url": "https://gov.sg/announcements/80832",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of sg regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.576020",
+    "country_code": "sg",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-12",
+    "url": "https://gov.jp/announcements/27200",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of jp regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.574634",
+    "country_code": "jp",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-8",
+    "url": "https://gov.jp/announcements/61538",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of jp regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.574643",
+    "country_code": "jp",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-43",
+    "url": "https://gov.my/announcements/25276",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of my regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.575755",
+    "country_code": "my",
+    "region": "asia"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-45",
+    "url": "https://gov.pl/announcements/10505",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of pl regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.579423",
+    "country_code": "pl",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-23",
+    "url": "https://gov.es/announcements/41969",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of es regarding regional updates.",
+    "status_level": "Warning",
+    "collected_at": "2026-02-10T03:12:15.578118",
+    "country_code": "es",
+    "region": "europe"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-8",
+    "url": "https://gov.gh/announcements/17888",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of gh regarding regional updates.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:12:15.582697",
+    "country_code": "gh",
+    "region": "africa"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-26",
+    "url": "https://gov.ca/announcements/33741",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of ca regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.580806",
+    "country_code": "ca",
+    "region": "americas"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2024-29",
+    "url": "https://gov.us/announcements/61459",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of us regarding regional updates.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:12:15.580631",
+    "country_code": "us",
+    "region": "americas"
+  }
+]
