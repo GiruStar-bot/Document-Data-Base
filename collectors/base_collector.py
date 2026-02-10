@@ -1,73 +1,51 @@
+import os
 import json
+import requests
 from datetime import datetime
-from pathlib import Path
 from abc import ABC, abstractmethod
 
-class BaseCollector(ABC):
+class EconomicDocumentCollector(ABC):
     """
-    全てのスクレイパーの親となる基底クラス。
-    各国のデータソースに合わせて継承して使用します。
+    世界各国の経済文書を収集するための基底クラス。
+    新しい国や組織を追加する場合は、このクラスを継承します。
     """
-    
-    def __init__(self, region: str, country_code: str):
-        self.region = region
+    def __init__(self, country_code, organization_name):
         self.country_code = country_code
-        self.base_data_path = Path("data/regions") / region
+        self.organization_name = organization_name
+        self.base_data_path = f"data/{country_code}/{organization_name}"
+        os.makedirs(self.base_data_path, exist_ok=True)
 
     @abstractmethod
-    def fetch(self) -> list:
+    def fetch_latest_documents(self):
         """
-        データを取得する抽象メソッド。
-        各サブクラスで実装が必要です。
+        最新の文書リストを取得するメソッド。各サブクラスで実装。
         """
         pass
 
-    def normalize(self, raw_data: dict) -> dict:
+    def save_metadata(self, doc_id, metadata):
         """
-        取得したデータを共通フォーマットに変換します。
+        文書のメタデータをJSONとして保存。
         """
-        return {
-            "title": raw_data.get("title", "No Title"),
-            "url": raw_data.get("url", ""),
-            "date": raw_data.get("date", datetime.now().strftime("%Y-%m-%d")),
-            "summary": raw_data.get("summary", ""),
-            "status_level": raw_data.get("status_level", "Notice"), # Critical, Warning, Notice
-            "collected_at": datetime.now().isoformat()
-        }
-
-    def save_data(self, new_items: list):
-        """
-        既存のJSONファイルを読み込み、重複を排除して新しいデータを追記保存します。
-        """
-        file_path = self.base_data_path / f"{self.country_code}.json"
-        
-        # フォルダの作成
-        file_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        existing_data = []
-        if file_path.exists():
-            try:
-                with open(file_path, "r", encoding="utf-8") as f:
-                    existing_data = json.load(f)
-            except (json.JSONDecodeError, IOError):
-                existing_data = []
-
-        # 重複排除用のURLリスト
-        existing_urls = {item["url"] for item in existing_data}
-        
-        # 正規化と新規データの抽出
-        added_count = 0
-        for item in new_items:
-            normalized = self.normalize(item)
-            if normalized["url"] not in existing_urls:
-                existing_data.append(normalized)
-                existing_urls.add(normalized["url"])
-                added_count += 1
-
-        # 日付順にソート（新しい順）
-        existing_data.sort(key=lambda x: x["date"], reverse=True)
-
+        metadata.update({
+            "collected_at": datetime.now().isoformat(),
+            "country": self.country_code,
+            "organization": self.organization_name
+        })
+        file_path = os.path.join(self.base_data_path, f"{doc_id}.json")
         with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(existing_data, f, ensure_ascii=False, indent=2)
-            
-        return added_count
+            json.dump(metadata, f, ensure_ascii=False, indent=4)
+        print(f"Saved: {metadata['title']}")
+
+    def generate_master_index(self):
+        """
+        収集した全データのインデックスを更新。フロントエンドが読み込む用。
+        """
+        all_data = []
+        for root, dirs, files in os.walk("data"):
+            for file in files:
+                if file.endswith(".json") and file != "master_index.json":
+                    with open(os.path.join(root, file), "r", encoding="utf-8") as f:
+                        all_data.append(json.load(f))
+        
+        with open("data/master_index.json", "w", encoding="utf-8") as f:
+            json.dump(all_data, f, ensure_ascii=False, indent=4)
