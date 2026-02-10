@@ -1,5 +1,15 @@
 [
     {
+        "title": "Beige Book - February 2026",
+        "date": "2026-02-05",
+        "url": "https://www.federalreserve.gov/monetarypolicy/beigebook202602.htm",
+        "category": "Monetary Policy",
+        "country": "USA",
+        "organization": "FED",
+        "collected_at": "2026-02-10T06:34:31.905634",
+        "doc_id": "usa_fed_20260205"
+    },
+    {
         "title": "財務総合政策研究所",
         "date": "2026-01-05",
         "url": "https://www.mof.go.jp/pri/index.htm",
@@ -16,6 +26,16 @@
         "country": "JPN",
         "organization": "MOF",
         "collected_at": "2026-02-10T05:39:42.615893"
+    },
+    {
+        "title": "令和7年度予算案の概要",
+        "date": "2024-12-24",
+        "url": "https://www.mof.go.jp/budget/budger_workflow/budget/fy2025/seian/01.pdf",
+        "category": "Budget",
+        "country": "JPN",
+        "organization": "MOF",
+        "collected_at": "2026-02-10T06:34:31.905436",
+        "doc_id": "jpn_mof_20241224"
     },
     {
         "id": "jpn_mof_budget_r7",
@@ -38,5 +58,35 @@
         "country": "INT",
         "organization": "IMF",
         "doc_id": "imf_weo_2024_oct"
+    },
+    {
+        "title": "World Economic Outlook, October 2024",
+        "date": "2024-10-22",
+        "url": "https://www.imf.org/-/media/Files/Publications/WEO/2024/October/English/text.ashx",
+        "category": "Global Economy",
+        "country": "INT",
+        "organization": "IMF",
+        "collected_at": "2026-02-10T06:34:31.905260",
+        "doc_id": "imf_20241022"
+    },
+    {
+        "title": "World Energy Outlook 2024",
+        "date": "2024-10-16",
+        "url": "https://www.iea.org/reports/world-energy-outlook-2024",
+        "category": "Energy Economy",
+        "country": "INT",
+        "organization": "IEA",
+        "collected_at": "2026-02-10T06:34:31.905781",
+        "doc_id": "iea_20241016_0"
+    },
+    {
+        "title": "Renewables 2024",
+        "date": "2024-10-01",
+        "url": "https://www.iea.org/reports/renewables-2024",
+        "category": "Energy Market",
+        "country": "INT",
+        "organization": "IEA",
+        "collected_at": "2026-02-10T06:34:31.905852",
+        "doc_id": "iea_20241001_1"
     }
 ]
