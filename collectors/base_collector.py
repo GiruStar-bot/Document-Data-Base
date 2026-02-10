@@ -20,7 +20,7 @@ class EconomicDocumentCollector(ABC):
         pass
 
     def save_metadata(self, doc_id, metadata):
-        """メタデータを保存"""
+        """メタデータを個別のJSONとして保存"""
         metadata.update({
             "collected_at": datetime.now().isoformat(),
             "country": self.country_code,
@@ -31,12 +31,12 @@ class EconomicDocumentCollector(ABC):
         file_path = os.path.join(self.base_data_path, f"{doc_id}.json")
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(metadata, f, ensure_ascii=False, indent=4)
-        print(f"Saved Metadata: {metadata.get('title', doc_id)}")
+        print(f"  [Saved] {metadata.get('title', doc_id)}")
 
     def generate_master_index(self):
         """
         全JSONを集約して master_index.json を生成。
-        リスト型のデータが混入してソートエラーが出る問題を修正。
+        AttributeError ('list' object has no attribute 'get') を防ぐためのチェックを追加。
         """
         all_data = []
         for root, dirs, files in os.walk("data"):
@@ -50,14 +50,15 @@ class EconomicDocumentCollector(ABC):
                             if isinstance(data, dict):
                                 all_data.append(data)
                             else:
-                                print(f"Skipping non-dict file: {file}")
+                                print(f"  [Skip] Non-dictionary file found: {file}")
                     except Exception as e:
-                        print(f"Error reading {file}: {e}")
+                        print(f"  [Error] Failed to read {file}: {e}")
         
-        # 'date' キーを持つものだけでソート。ない場合は空文字にする
+        # 'date' キーを持つものだけでソート。ない場合は空文字にする。
+        # すべての要素が辞書であることを保証した上でソート実行
         all_data.sort(key=lambda x: str(x.get("date", "")), reverse=True)
 
         # 最終的な書き出し
         with open("data/master_index.json", "w", encoding="utf-8") as f:
             json.dump(all_data, f, ensure_ascii=False, indent=4)
-        print(f"Successfully updated master index with {len(all_data)} items.")
+        print(f"Index generation complete. Total documents: {len(all_data)}")
