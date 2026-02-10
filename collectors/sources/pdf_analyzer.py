@@ -1,61 +1,48 @@
 import os
 import json
-import base64
-from pathlib import Path
 import google.generativeai as genai
+from pathlib import Path
 
 class PDFAnalyzer:
-    """
-    PDFファイルをGemini AIで分析し、構造化データを抽出するクラス。
-    """
-    def __init__(self, api_key=""):
-        # APIキーの設定（環境変数または直接入力）
+    """Gemini APIを使用してPDFを分析する"""
+    def __init__(self, api_key):
         self.api_key = api_key
         if self.api_key:
             genai.configure(api_key=self.api_key)
-        self.model = genai.GenerativeModel('gemini-2.5-flash-preview-09-2025')
+            self.model = genai.GenerativeModel('gemini-2.5-flash-preview-09-2025')
+        else:
+            self.model = None
 
-    def analyze_pdf(self, pdf_path: Path):
-        """
-        PDFを読み込み、AIに分析を依頼する。
-        """
-        if not self.api_key:
-            return self._get_mock_analysis(pdf_path.name)
+    def analyze(self, pdf_path: Path):
+        """PDFの内容をAIで要約・分類する"""
+        if not self.model:
+            return self._fallback_analysis()
 
         try:
-            # PDFファイルを読み込んでBase64エンコード（Gemini APIへの送信用）
-            with open(pdf_path, "rb") as f:
-                pdf_data = f.read()
+            # PDFファイルをアップロード
+            sample_file = genai.upload_file(path=pdf_path, mime_type="application/pdf")
             
-            # AIへのプロンプト
             prompt = """
-            この公的ドキュメントを分析し、以下のJSON形式で返してください。
-            {
-                "summary": "100字程度の要約",
-                "category": "経済/安全保障/環境/教育/その他",
-                "risk_level": "Critical/Warning/Notice/Info",
-                "key_points": ["重要点1", "重要点2", "重要点3"]
-            }
+            この公的ドキュメントを読み、以下の項目を日本語のJSON形式で出力してください。
+            - summary: 150文字以内の簡潔な要約
+            - risk_level: 文脈に基づいた重要度 (Critical, Warning, Notice, Info)
+            - category: 経済, 安全保障, 環境, 医療, その他のいずれか
+            - insights: 注目すべきポイント3点のリスト
+            JSON以外のテキストは含めないでください。
             """
             
-            # Gemini 2.5 Flash はマルチモーダル対応なので、PDFを直接渡せます
-            response = self.model.generate_content([
-                prompt,
-                {'mime_type': 'application/pdf', 'data': pdf_data}
-            ])
-            
-            # JSON部分を抽出してパース
-            result_text = response.text.replace('```json', '').replace('```', '').strip()
-            return json.loads(result_text)
+            response = self.model.generate_content([prompt, sample_file])
+            # JSON文字列を抽出
+            raw_text = response.text.strip().replace('```json', '').replace('```', '')
+            return json.loads(raw_text)
         except Exception as e:
             print(f"AI Analysis Error for {pdf_path.name}: {e}")
-            return self._get_mock_analysis(pdf_path.name)
+            return self._fallback_analysis()
 
-    def _get_mock_analysis(self, filename):
-        """APIキーがない場合やエラー時のフォールバック"""
+    def _fallback_analysis(self):
         return {
-            "summary": f"Analysis for {filename}: This document discusses regional policy updates.",
-            "category": "Environment" if "env" in filename.lower() else "Policy",
+            "summary": "AI分析がスキップされました（APIキー未設定またはエラー）。",
             "risk_level": "Notice",
-            "key_points": ["Policy change", "Implementation date", "Budget allocation"]
+            "category": "その他",
+            "insights": ["資料は保存されています。詳細を確認してください。"]
         }
