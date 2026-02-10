@@ -1,0 +1,34 @@
+steps:
+  # 1. リポジトリのソースコードを取得
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  # 2. Python環境をセットアップ（バージョン3.10）
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: '3.10'
+
+  # 3. 実行に必要なライブラリ（requests）をインストール
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install requests
+
+  # 4. メインの収集プログラムを実行
+  - name: Run data collection script
+    run: python main.py
+
+  # 5. 実行によって増えたデータ（data/ フォルダ配下）をGitHubに保存
+  - name: Commit and push changes
+    run: |
+      # Gitのユーザー設定（Actionsのボットとしてコミットするため）
+      git config --local user.email "github-actions[bot]@users.noreply.github.com"
+      git config --local user.name "github-actions[bot]"
+      
+      # データの変更をステージング
+      git add data/
+      
+      # 変更がある場合のみコミットしてプッシュする
+      # git diff で差分を確認し、差分がなければ何もしないように制御しています
+      git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: $(date +'%Y-%m-%d %H:%M:%S')" && git push)
