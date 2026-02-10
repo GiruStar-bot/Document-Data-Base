@@ -36,14 +36,10 @@ class JapanMOFCollector(EconomicDocumentCollector):
             self.save_metadata(doc["id"], doc)
 
 class USFedCollector(EconomicDocumentCollector):
-    """
-    アメリカ連邦準備制度理事会 (FED) のデータを収集
-    """
     def __init__(self):
         super().__init__("USA", "FED")
 
     def fetch_latest_documents(self):
-        # 実際にはFRBのサイトをスクレイピングするロジックが入ります
         real_docs = [
             {
                 "id": "usa_fed_beige_202602",
@@ -56,4 +52,23 @@ class USFedCollector(EconomicDocumentCollector):
         for doc in real_docs:
             self.save_metadata(doc["id"], doc)
 
-# main.py の実行時にこのクラスもインスタンス化するように main.py を更新してください。
+class ECBCollector(EconomicDocumentCollector):
+    """
+    欧州中央銀行 (ECB) の情報を取得
+    """
+    def __init__(self):
+        super().__init__("EUR", "ECB")
+
+    def fetch_latest_documents(self):
+        # ECBの経済見通しをサンプルとして追加
+        real_docs = [
+            {
+                "id": "eur_ecb_bulletin_2025_01",
+                "title": "Economic Bulletin, Issue 1, 2025",
+                "date": "2025-01-30",
+                "category": "Monetary Policy",
+                "url": "https://www.ecb.europa.eu/pub/pdf/ecbu/eb202501.en.pdf"
+            }
+        ]
+        for doc in real_docs:
+            self.save_metadata(doc["id"], doc)
