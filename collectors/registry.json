@@ -1,0 +1,23 @@
+[
+    {
+        "id": "imf",
+        "country": "INT",
+        "org": "IMF",
+        "url": "https://www.imf.org/en/publications/search",
+        "category": "Global"
+    },
+    {
+        "id": "jp_mof",
+        "country": "JPN",
+        "org": "MOF",
+        "url": "https://www.mof.go.jp/budget/index.html",
+        "category": "Budget"
+    },
+    {
+        "id": "us_fed",
+        "country": "USA",
+        "org": "FED",
+        "url": "https://www.federalreserve.gov/monetarypolicy/beigebook.htm",
+        "category": "Monetary"
+    }
+]
