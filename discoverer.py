@@ -8,31 +8,37 @@ class SourceDiscoverer:
     Gemini APIを使用して、インターネットから新しい経済文書のソース（公式サイト）を探索するクラス。
     """
     def __init__(self):
-        # 環境変数からAPIキーを取得。Secretに設定されていればここに入ります。
+        # 環境変数からAPIキーを取得
         self.api_key = os.getenv("GEMINI_API_KEY", "")
         self.model = "gemini-2.5-flash-preview-09-2025"
         self.api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
 
     def search_new_sources(self, existing_sources):
         if not self.api_key:
-            print("  [Discovery] Skip: GEMINI_API_KEY is not set in environment.")
+            print("  [Discovery] Error: GEMINI_API_KEY is not set.")
             return []
 
         existing_orgs = [s['org'] for s in existing_sources]
+        existing_urls = [s['url'] for s in existing_sources]
         
-        system_instruction = "あなたは経済機関の公式サイトを探索する専門家です。必ず指定されたJSON配列形式で回答してください。"
+        system_instruction = """あなたは世界中の公的経済データの所在を特定するエキスパートです。
+必ず指定されたJSON形式の配列のみを回答してください。説明文は一切不要です。"""
         
-        # 探索数を3つから10件以上に増やし、より広範な地域を指定します
+        # AIに対して「既存リスト以外」を強く意識させ、かつ検索ワードを具体化します
         prompt = f"""
-        現在以下の組織を収集済みです: {', '.join(existing_orgs)}。
-        これら以外の、まだ登録されていない世界各国の財務省（Ministry of Finance）や中央銀行（Central Bank）の、
-        最新の経済レポートや公的文書が掲載されている公式URLを「10件」新しく見つけてください。
+        世界中には190以上の国と数多くの国際機関があります。
+        現在、以下の組織はすでに収集済みです: {', '.join(existing_orgs)}。
         
-        対象地域: アフリカ、中東、東南アジア、中南米、東欧を重点的に。
+        これら以外の国（特に南米、中央アジア、中東、アフリカ、太平洋諸国）で、
+        最新の経済報告書や統計PDFを公開している「財務省」または「中央銀行」の公式URLを【10件】新しく特定してください。
         
-        回答は以下の形式のJSON配列のみにしてください:
+        以下の条件を厳守してください：
+        1. 既にリストにあるURL ({', '.join(existing_urls[:5])}...) は絶対に含めない。
+        2. 文書（Publications/Reports）が直接掲載されているページのURLを指定する。
+        3. 以下のJSON配列形式で出力する。
+        
         [
-            {{"id": "unique_id", "country": "ISO3", "org": "略称", "url": "レポートページのURL", "category": "Economic"}}
+            {{"id": "unique_id", "country": "ISO3", "org": "略称", "url": "URL", "category": "Economic"}}
         ]
         """
 
@@ -47,21 +53,32 @@ class SourceDiscoverer:
 
         for i in range(5):
             try:
-                print(f"  [AI Discovery] Searching web for more sources (Attempt {i+1})...")
-                response = requests.post(self.api_url, json=payload, timeout=40)
+                print(f"  [AI Discovery] Searching for 10 new sources (Attempt {i+1})...")
+                response = requests.post(self.api_url, json=payload, timeout=50)
+                
                 if response.status_code == 200:
                     result = response.json()
-                    text = result['candidates'][0]['content']['parts'][0]['text']
-                    new_sources = json.loads(text)
-                    # 重複を除外して返す
-                    filtered_sources = [ns for ns in new_sources if ns['url'] not in [s['url'] for s in existing_sources]]
-                    print(f"  [AI Discovery] Found {len(filtered_sources)} new unique sources.")
-                    return filtered_sources
+                    raw_text = result['candidates'][0]['content']['parts'][0]['text']
+                    
+                    try:
+                        new_sources = json.loads(raw_text)
+                    except json.JSONDecodeError:
+                        print("    [Error] AI returned invalid JSON. Retrying...")
+                        continue
+
+                    # フィルタリング
+                    unique_new_sources = []
+                    for ns in new_sources:
+                        if ns['url'] not in existing_urls:
+                            unique_new_sources.append(ns)
+                    
+                    print(f"    [Success] AI suggested {len(new_sources)} sources, {len(unique_new_sources)} are new.")
+                    return unique_new_sources
                 
-                print(f"    API Error: {response.status_code}")
+                print(f"    [Error] API Status: {response.status_code}")
                 time.sleep(2**i)
             except Exception as e:
-                print(f"    Exception during discovery: {e}")
+                print(f"    [Exception] {e}")
                 time.sleep(2**i)
         
         return []
