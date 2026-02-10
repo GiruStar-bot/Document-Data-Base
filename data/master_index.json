@@ -1,5 +1,23 @@
 [
     {
+        "title": "財務総合政策研究所",
+        "date": "2026-01-05",
+        "url": "https://www.mof.go.jp/pri/index.htm",
+        "category": "Research Index",
+        "country": "JPN",
+        "organization": "MOF",
+        "collected_at": "2026-02-10T05:39:42.616079"
+    },
+    {
+        "title": "予算・決算",
+        "date": "2026-01-05",
+        "url": "https://www.mof.go.jp/policy/budget/index.html",
+        "category": "Budget Policy Index",
+        "country": "JPN",
+        "organization": "MOF",
+        "collected_at": "2026-02-10T05:39:42.615893"
+    },
+    {
         "id": "jpn_mof_budget_r7",
         "title": "令和7年度予算案の概要",
         "date": "2024-12-24",
