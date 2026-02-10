@@ -1,36 +1,43 @@
 name: Update Public Document Database
 
 on:
-workflow_dispatch:
-schedule:
-- cron: '0 0 * * *'
+  # GitHubの「Actions」タブから手動で実行可能にする
+  workflow_dispatch:
+  # 毎日日本時間の午前9時（UTC 0:00）に自動実行
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
-build:
-runs-on: ubuntu-latest
-permissions:
-contents: write
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # リポジトリへの自動保存を許可
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-  - name: Install dependencies
-    run: |
-      python -m pip install --upgrade pip
-      pip install requests
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
 
-  - name: Run data collection script
-    run: python main.py
+      - name: Run data collection script
+        run: python main.py
 
-  - name: Commit and push changes
-    run: |
-      git config --local user.email "github-actions[bot]@users.noreply.github.com"
-      git config --local user.name "github-actions[bot]"
-      git add data/
-      git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: $(date +'%Y-%m-%d %H:%M:%S')" && git push)
+      - name: Commit and push changes
+        run: |
+          # ActionsのBotとして操作するための設定
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # データの追加
+          git add data/
+          
+          # 変更がある場合のみコミットしてプッシュ
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: $(date +'%Y-%m-%d %H:%M:%S')" && git push)
