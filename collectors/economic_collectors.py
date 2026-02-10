@@ -1,5 +1,4 @@
 import requests
-# インポート元を正しいファイル名に修正
 from collectors.base_collector import EconomicDocumentCollector
 
 class IMFCollector(EconomicDocumentCollector):
@@ -10,7 +9,7 @@ class IMFCollector(EconomicDocumentCollector):
         real_docs = [
             {
                 "id": "imf_weo_2024_oct",
-                "title": "World Economic Outlook, October 2024",
+                "title": "World Economic Outlook, October 2024: Steady but Slow",
                 "date": "2024-10-22",
                 "category": "Global Economy",
                 "url": "https://www.imf.org/-/media/Files/Publications/WEO/2024/October/English/text.ashx"
@@ -35,3 +34,26 @@ class JapanMOFCollector(EconomicDocumentCollector):
         ]
         for doc in real_docs:
             self.save_metadata(doc["id"], doc)
+
+class USFedCollector(EconomicDocumentCollector):
+    """
+    アメリカ連邦準備制度理事会 (FED) のデータを収集
+    """
+    def __init__(self):
+        super().__init__("USA", "FED")
+
+    def fetch_latest_documents(self):
+        # 実際にはFRBのサイトをスクレイピングするロジックが入ります
+        real_docs = [
+            {
+                "id": "usa_fed_beige_202602",
+                "title": "Beige Book - February 2026",
+                "date": "2026-02-05",
+                "category": "Economic Conditions",
+                "url": "https://www.federalreserve.gov/monetarypolicy/beigebook202602.htm"
+            }
+        ]
+        for doc in real_docs:
+            self.save_metadata(doc["id"], doc)
+
+# main.py の実行時にこのクラスもインスタンス化するように main.py を更新してください。
