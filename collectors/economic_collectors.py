@@ -1,111 +1,70 @@
 import requests
-import re
-from collectors.base_collector import GenericEconomicCollector
+from collectors.base import EconomicDocumentCollector
 
-class IMFCollector(GenericEconomicCollector):
-    """
-    IMF専用クローラー（API不使用）
-    """
+class IMFCollector(EconomicDocumentCollector):
     def __init__(self):
-        super().__init__("INT", "IMF", "https://www.imf.org/en/publications/search")
-
+        super().__init__("INT", "IMF")
     def fetch_latest_documents(self):
-        # IMFのサイト構造に合わせた伝統的なスクレイピング
-        print("    [Direct] Fetching from IMF via direct URL mapping...")
-        docs = [
-            {
-                "title": "World Economic Outlook, October 2024",
-                "date": "2024-10-22",
-                "url": "https://www.imf.org/-/media/Files/Publications/WEO/2024/October/English/text.ashx",
-                "category": "Global Economy"
-            }
-        ]
-        count = 0
-        for doc in docs:
-            self.save_metadata(f"imf_{doc['date'].replace('-', '')}", doc)
-            count += 1
-        return count
+        print("    [Direct] IMF Check...")
+        docs = [{"title": "World Economic Outlook, Oct 2024", "date": "2024-10-22", "url": "https://www.imf.org/-/media/Files/Publications/WEO/2024/October/English/text.ashx", "category": "Global"}]
+        for d in docs: self.save_metadata(f"imf_{d['date'].replace('-', '')}", d)
+        return len(docs)
 
-class JapanMOFCollector(GenericEconomicCollector):
-    """
-    日本財務省専用クローラー（API不使用）
-    """
+class JapanMOFCollector(EconomicDocumentCollector):
     def __init__(self):
-        super().__init__("JPN", "MOF", "https://www.mof.go.jp/budget/index.html")
-
+        super().__init__("JPN", "MOF")
     def fetch_latest_documents(self):
-        print("    [Direct] Fetching from Japan MOF...")
-        docs = [
-            {
-                "title": "令和7年度予算案の概要",
-                "date": "2024-12-24",
-                "url": "https://www.mof.go.jp/budget/budger_workflow/budget/fy2025/seian/01.pdf",
-                "category": "Budget"
-            }
-        ]
-        count = 0
-        for doc in docs:
-            self.save_metadata(f"jpn_mof_{doc['date'].replace('-', '')}", doc)
-            count += 1
-        return count
+        print("    [Direct] Japan MOF Check...")
+        docs = [{"title": "令和7年度予算案の概要", "date": "2024-12-24", "url": "https://www.mof.go.jp/budget/budger_workflow/budget/fy2025/seian/01.pdf", "category": "Budget"}]
+        for d in docs: self.save_metadata(f"mof_{d['date'].replace('-', '')}", d)
+        return len(docs)
 
-class USFedCollector(GenericEconomicCollector):
-    """
-    米国FRB専用クローラー（API不使用）
-    """
+class USFedCollector(EconomicDocumentCollector):
     def __init__(self):
-        super().__init__("USA", "FED", "https://www.federalreserve.gov/monetarypolicy/beigebook.htm")
-
+        super().__init__("USA", "FED")
     def fetch_latest_documents(self):
-        print("    [Direct] Fetching from US Federal Reserve...")
-        docs = [
-            {
-                "title": "Beige Book - February 2026",
-                "date": "2026-02-05",
-                "url": "https://www.federalreserve.gov/monetarypolicy/beigebook202602.htm",
-                "category": "Monetary Policy"
-            }
-        ]
-        count = 0
-        for doc in docs:
-            self.save_metadata(f"usa_fed_{doc['date'].replace('-', '')}", doc)
-            count += 1
-        return count
+        print("    [Direct] US FED Check...")
+        docs = [{"title": "Beige Book - Feb 2026", "date": "2026-02-05", "url": "https://www.federalreserve.gov/monetarypolicy/beigebook202602.htm", "category": "Monetary"}]
+        for d in docs: self.save_metadata(f"fed_{d['date'].replace('-', '')}", d)
+        return len(docs)
 
-class IEACollector(GenericEconomicCollector):
-    """
-    IEA（国際エネルギー機関）専用クローラー（API不使用）
-    """
+class OECDCollector(EconomicDocumentCollector):
     def __init__(self):
-        super().__init__("INT", "IEA", "https://www.iea.org/reports")
-
+        super().__init__("INT", "OECD")
     def fetch_latest_documents(self):
-        print("    [Direct] Fetching from IEA (International Energy Agency)...")
-        # IEAの主要な報告書（World Energy Outlook等）
-        docs = [
-            {
-                "title": "World Energy Outlook 2024",
-                "date": "2024-10-16",
-                "url": "https://www.iea.org/reports/world-energy-outlook-2024",
-                "category": "Energy Economy"
-            },
-            {
-                "title": "Renewables 2024",
-                "date": "2024-10-01",
-                "url": "https://www.iea.org/reports/renewables-2024",
-                "category": "Energy Market"
-            }
-        ]
-        count = 0
-        for doc in docs:
-            self.save_metadata(f"iea_{doc['date'].replace('-', '')}_{count}", doc)
-            count += 1
-        return count
+        print("    [Direct] OECD Check...")
+        docs = [{"title": "OECD Economic Outlook, Nov 2024", "date": "2024-11-25", "url": "https://www.oecd.org/en/publications/oecd-economic-outlook-volume-2024-issue-2_78947690-en.html", "category": "Outlook"}]
+        for d in docs: self.save_metadata(f"oecd_{d['date'].replace('-', '')}", d)
+        return len(docs)
 
-# 安定ソース（Geminiを使わずに実行するクラス）のリスト
+class WorldBankCollector(EconomicDocumentCollector):
+    def __init__(self):
+        super().__init__("INT", "WB")
+    def fetch_latest_documents(self):
+        print("    [Direct] World Bank Check...")
+        docs = [{"title": "Global Economic Prospects, Jan 2025", "date": "2025-01-09", "url": "https://www.worldbank.org/en/publication/global-economic-prospects", "category": "Global"}]
+        for d in docs: self.save_metadata(f"wb_{d['date'].replace('-', '')}", d)
+        return len(docs)
+
+class ECBCollector(EconomicDocumentCollector):
+    def __init__(self):
+        super().__init__("EUR", "ECB")
+    def fetch_latest_documents(self):
+        print("    [Direct] ECB Check...")
+        docs = [{"title": "Economic Bulletin Issue 1, 2025", "date": "2025-02-06", "url": "https://www.ecb.europa.eu/pub/pdf/ecbu/eb202501.en.pdf", "category": "Monetary"}]
+        for d in docs: self.save_metadata(f"ecb_{d['date'].replace('-', '')}", d)
+        return len(docs)
+
+class BOJCollector(EconomicDocumentCollector):
+    def __init__(self):
+        super().__init__("JPN", "BOJ")
+    def fetch_latest_documents(self):
+        print("    [Direct] BOJ Check...")
+        docs = [{"title": "経済・物価情勢の展望（2025年1月）", "date": "2025-01-23", "url": "https://www.boj.or.jp/mopo/outlook/gor2501.pdf", "category": "Monetary"}]
+        for d in docs: self.save_metadata(f"boj_{d['date'].replace('-', '')}", d)
+        return len(docs)
+
 STABLE_COLLECTORS = [
-    IMFCollector,
-    JapanMOFCollector,
-    USFedCollector,
-    IEACollector # IEAを追加
+    IMFCollector, JapanMOFCollector, USFedCollector, 
+    OECDCollector, WorldBankCollector, ECBCollector, BOJCollector
 ]
