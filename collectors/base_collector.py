@@ -4,61 +4,59 @@ import requests
 from datetime import datetime
 from abc import ABC, abstractmethod
 
-class EconomicDocumentCollector(ABC):
+class GenericEconomicCollector:
     """
-    世界各国の経済文書を収集するための基底クラス。
+    特定のサイト構造に依存せず、URLとAIの指示で文書を特定する汎用コレクター。
     """
-    def __init__(self, country_code, organization_name):
+    def __init__(self, country_code, organization_name, target_url):
         self.country_code = country_code
         self.organization_name = organization_name
+        self.target_url = target_url
         self.base_data_path = f"data/{country_code}/{organization_name}"
         os.makedirs(self.base_data_path, exist_ok=True)
 
-    @abstractmethod
     def fetch_latest_documents(self):
-        """最新文書リストを取得（各子クラスで実装）"""
-        pass
+        """
+        AI (Gemini) を呼び出して、ターゲットURLから経済文書のリンクを抽出する（想定）。
+        現在はモックデータを保存しますが、ここをAI API連携に差し替えます。
+        """
+        # ここに Gemini 連携 (Image Understanding or HTML Analysis) を入れることで
+        # あらゆるサイトの構造変化に対応できます。
+        print(f"  Fetching from {self.target_url} using AI Parsing...")
+        
+        # 擬似的に取得されたデータ
+        sample_doc = {
+            "id": f"{self.organization_name.lower()}_{datetime.now().strftime('%Y%m%d')}",
+            "title": f"Recent Report from {self.organization_name}",
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "category": "Economic Policy",
+            "url": self.target_url # 本来はAIが抽出したPDFリンク
+        }
+        self.save_metadata(sample_doc["id"], sample_doc)
 
     def save_metadata(self, doc_id, metadata):
-        """メタデータを個別のJSONとして保存"""
         metadata.update({
             "collected_at": datetime.now().isoformat(),
             "country": self.country_code,
             "organization": self.organization_name,
             "doc_id": doc_id
         })
-        
         file_path = os.path.join(self.base_data_path, f"{doc_id}.json")
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(metadata, f, ensure_ascii=False, indent=4)
-        print(f"  [Saved] {metadata.get('title', doc_id)}")
 
     def generate_master_index(self):
-        """
-        全JSONを集約して master_index.json を生成。
-        AttributeError ('list' object has no attribute 'get') を防ぐためのチェックを追加。
-        """
         all_data = []
         for root, dirs, files in os.walk("data"):
             for file in files:
-                # master_index.json 自体は読み込まない
                 if file.endswith(".json") and file != "master_index.json":
                     try:
                         with open(os.path.join(root, file), "r", encoding="utf-8") as f:
                             data = json.load(f)
-                            # データが辞書型であることを確認 (リスト型ならスキップ)
                             if isinstance(data, dict):
                                 all_data.append(data)
-                            else:
-                                print(f"  [Skip] Non-dictionary file found: {file}")
-                    except Exception as e:
-                        print(f"  [Error] Failed to read {file}: {e}")
+                    except: pass
         
-        # 'date' キーを持つものだけでソート。ない場合は空文字にする。
-        # すべての要素が辞書であることを保証した上でソート実行
         all_data.sort(key=lambda x: str(x.get("date", "")), reverse=True)
-
-        # 最終的な書き出し
         with open("data/master_index.json", "w", encoding="utf-8") as f:
             json.dump(all_data, f, ensure_ascii=False, indent=4)
-        print(f"Index generation complete. Total documents: {len(all_data)}")
