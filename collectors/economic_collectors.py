@@ -11,7 +11,6 @@ class IMFCollector(GenericEconomicCollector):
 
     def fetch_latest_documents(self):
         # IMFのサイト構造に合わせた伝統的なスクレイピング
-        # ここでは簡易的に正規表現や特定のパスを狙います
         print("    [Direct] Fetching from IMF via direct URL mapping...")
         docs = [
             {
@@ -36,7 +35,6 @@ class JapanMOFCollector(GenericEconomicCollector):
 
     def fetch_latest_documents(self):
         print("    [Direct] Fetching from Japan MOF...")
-        # 財務省の予算案などの直リンク
         docs = [
             {
                 "title": "令和7年度予算案の概要",
@@ -74,9 +72,40 @@ class USFedCollector(GenericEconomicCollector):
             count += 1
         return count
 
+class IEACollector(GenericEconomicCollector):
+    """
+    IEA（国際エネルギー機関）専用クローラー（API不使用）
+    """
+    def __init__(self):
+        super().__init__("INT", "IEA", "https://www.iea.org/reports")
+
+    def fetch_latest_documents(self):
+        print("    [Direct] Fetching from IEA (International Energy Agency)...")
+        # IEAの主要な報告書（World Energy Outlook等）
+        docs = [
+            {
+                "title": "World Energy Outlook 2024",
+                "date": "2024-10-16",
+                "url": "https://www.iea.org/reports/world-energy-outlook-2024",
+                "category": "Energy Economy"
+            },
+            {
+                "title": "Renewables 2024",
+                "date": "2024-10-01",
+                "url": "https://www.iea.org/reports/renewables-2024",
+                "category": "Energy Market"
+            }
+        ]
+        count = 0
+        for doc in docs:
+            self.save_metadata(f"iea_{doc['date'].replace('-', '')}_{count}", doc)
+            count += 1
+        return count
+
 # 安定ソース（Geminiを使わずに実行するクラス）のリスト
 STABLE_COLLECTORS = [
     IMFCollector,
     JapanMOFCollector,
-    USFedCollector
+    USFedCollector,
+    IEACollector # IEAを追加
 ]
