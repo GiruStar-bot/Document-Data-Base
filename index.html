@@ -3,66 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Economic Document Base</title>
+    <title>GiruStar Document Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .glass-card {
-            background: rgba(255, 255, 255, 1);
+        .archive-card {
+            background: white;
             border: 1px solid #e2e8f0;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease;
         }
-        .glass-card:hover {
+        .archive-card:hover {
             border-color: #6366f1;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
-        #chat-window {
-            display: none;
-            position: fixed;
-            bottom: 90px;
-            right: 24px;
-            width: 380px;
-            max-width: calc(100vw - 48px);
-            height: 500px;
-            z-index: 1000;
-        }
-        .ai-message { background: #f8fafc; color: #1e293b; }
-        .user-message { background: #4f46e5; color: white; }
     </style>
 </head>
-<body class="bg-[#f8fafc] min-h-screen text-slate-900">
+<body class="bg-[#fcfcfd] min-h-screen text-slate-900">
 
-    <!-- Navbar -->
-    <nav class="sticky top-0 z-50 bg-white border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-database text-white text-xs"></i>
-                </div>
-                <div>
-                    <span class="text-lg font-bold tracking-tighter text-slate-900 uppercase">GiruStar <span class="text-indigo-600">Archive</span></span>
-                </div>
+    <!-- Navbar: Minimal -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 h-14">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-archive text-indigo-600 text-sm"></i>
+                <span class="text-sm font-bold tracking-tight text-slate-900 uppercase">GiruStar <span class="text-indigo-600">Archive</span></span>
             </div>
             <div id="sync-status" class="flex items-center space-x-2 text-[10px] font-bold text-slate-400">
-                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span id="sync-text">LIVE ARCHIVE</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span id="sync-text">LIVE</span>
             </div>
         </div>
     </nav>
 
-    <!-- Toolbar: Search and Filter are priority -->
-    <div class="bg-white border-b border-slate-200 py-4 sticky top-16 z-40">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-4">
-            <div class="md:col-span-9 relative">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                <input type="text" id="searchInput" placeholder="Search archive (Organization, Country, Keyword...)" 
-                       class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-sm">
+    <!-- Sticky Toolbar -->
+    <div class="bg-white border-b border-slate-200 py-3 sticky top-14 z-40">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-3">
+            <div class="flex-grow relative">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Search organization, country, or report title..." 
+                       class="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-slate-50">
             </div>
-            <div class="md:col-span-3">
-                <select id="countryFilter" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 font-semibold text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm appearance-none bg-white cursor-pointer">
-                    <option value="all">Global (All)</option>
+            <div class="md:w-48">
+                <select id="countryFilter" class="w-full px-3 py-2 rounded-lg border border-slate-200 font-semibold text-slate-600 text-sm bg-slate-50 appearance-none cursor-pointer focus:ring-2 focus:ring-indigo-500">
+                    <option value="all">Filter: Global</option>
                     <option value="JPN">Japan</option>
                     <option value="USA">USA</option>
                     <option value="EUR">Europe</option>
@@ -72,50 +56,44 @@
         </div>
     </div>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Document Grid -->
-        <div id="document-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Main Content: Immediate Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-6">
+        <div id="document-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Items injected here -->
         </div>
     </main>
 
+    <!-- AI Chat Toggle -->
+    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-12 h-12 bg-slate-900 rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition-transform z-[1001]">
+        <i class="fas fa-robot"></i>
+    </button>
+
     <!-- AI Chat UI -->
-    <div id="chat-window" class="glass-card rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
-        <div class="bg-slate-900 p-4 text-white flex justify-between items-center">
-            <div class="flex items-center space-x-2 text-sm">
-                <i class="fas fa-robot text-indigo-400"></i>
-                <span class="font-bold">AI Assistant</span>
-            </div>
-            <button onclick="toggleChat()" class="opacity-70 hover:opacity-100">
-                <i class="fas fa-times"></i>
-            </button>
+    <div id="chat-window" class="hidden fixed bottom-20 right-6 w-80 md:w-96 bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden border border-slate-200 z-[1000] h-[450px]">
+        <div class="bg-slate-900 p-3 text-white flex justify-between items-center text-xs font-bold">
+            <span>AI ASSISTANT</span>
+            <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
         </div>
-        <div id="chat-messages" class="flex-grow p-4 overflow-y-auto flex flex-col space-y-4 text-sm">
-            <div class="ai-message p-3 rounded-xl border border-slate-100">
-                アーカイブの内容について質問してください。
+        <div id="chat-messages" class="flex-grow p-4 overflow-y-auto flex flex-col space-y-3 text-xs">
+            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                アーカイブの内容を要約したり、特定の国の動向を質問できます。
             </div>
         </div>
-        <div class="p-4 border-t border-slate-100 bg-white">
+        <div class="p-3 border-t bg-slate-50">
             <div class="relative">
-                <input type="text" id="chatInput" placeholder="Ask AI..." 
-                       class="w-full pl-4 pr-12 py-2 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-                <button id="sendBtn" class="absolute right-2 top-1/2 -translate-y-1/2 text-indigo-600 p-2">
+                <input type="text" id="chatInput" placeholder="Ask anything..." 
+                       class="w-full pl-3 pr-10 py-2 rounded-lg border border-slate-200 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
+                <button id="sendBtn" class="absolute right-2 top-1/2 -translate-y-1/2 text-indigo-600 p-1">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <button onclick="toggleChat()" class="fixed bottom-6 right-6 w-14 h-14 bg-slate-900 rounded-full shadow-xl flex items-center justify-center text-white hover:scale-110 transition-transform z-[1001]">
-        <i class="fas fa-comment-dots text-xl"></i>
-    </button>
-
     <script>
         let documents = [];
         const isGithubPages = window.location.hostname.includes('github.io');
         const indexPath = isGithubPages ? `/Document-Data-Base/data/master_index.json` : 'data/master_index.json';
-        const apiKey = ""; 
 
         async function init() {
             try {
@@ -123,37 +101,36 @@
                 documents = await response.json();
                 render(documents);
             } catch (e) {
-                console.error("Fetch failed.");
+                console.error("Index load failed.");
             }
         }
 
         function toggleChat() {
             const win = document.getElementById('chat-window');
-            win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
+            win.classList.toggle('hidden');
         }
 
         function render(items) {
             const grid = document.getElementById('document-grid');
             if (items.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400">No data found</div>`;
+                grid.innerHTML = `<div class="col-span-full py-20 text-center text-slate-400 text-sm font-bold">アーカイブが見つかりません</div>`;
                 return;
             }
             grid.innerHTML = items.map(doc => `
-                <div class="glass-card rounded-2xl p-6 flex flex-col h-full">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded uppercase tracking-wider border border-indigo-100">
+                <div class="archive-card rounded-xl p-4 flex flex-col">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[9px] font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded uppercase border border-indigo-100">
                             ${doc.country}
                         </span>
-                        <span class="text-[10px] font-medium text-slate-400">${doc.date}</span>
+                        <span class="text-[9px] font-medium text-slate-400">${doc.date}</span>
                     </div>
-                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1">${doc.organization}</div>
-                    <h3 class="text-sm font-bold text-slate-800 leading-snug mb-4 flex-grow">
+                    <div class="text-[9px] font-extrabold text-slate-400 uppercase tracking-tighter mb-1">${doc.organization}</div>
+                    <h3 class="text-xs font-bold text-slate-800 leading-tight mb-3 flex-grow line-clamp-3">
                         ${doc.title}
                     </h3>
-                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-slate-50">
-                        <span class="text-[10px] text-slate-400 font-semibold uppercase">${doc.category || 'Report'}</span>
-                        <a href="${doc.url}" target="_blank" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center">
-                            VIEW <i class="fas fa-arrow-right ml-1"></i>
+                    <div class="pt-3 border-t border-slate-50 flex justify-end">
+                        <a href="${doc.url}" target="_blank" class="text-[10px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center">
+                            OPEN REPORT <i class="fas fa-external-link-alt ml-1"></i>
                         </a>
                     </div>
                 </div>
