@@ -2,11 +2,17 @@ import os
 import sys
 from datetime import datetime
 
-# Add current dir to path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# プロジェクトルートを作業ディレクトリとして追加
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
 
-from collectors.economic_collectors import STABLE_COLLECTORS
-from scripts.rebuild_index import rebuild_index
+# インポートエラーを防ぐため絶対パスでインポート
+try:
+    from collectors.economic_collectors import STABLE_COLLECTORS
+    from scripts.rebuild_index import rebuild_index
+except ImportError as e:
+    print(f"Import Error: {e}")
+    sys.exit(1)
 
 def main():
     print(f"=== GiruStar Archive Engine: {datetime.now().isoformat()} ===")
@@ -19,21 +25,19 @@ def main():
             c = collector_class()
             print(f"[*] Running {c.organization_name} ({c.country_code})...")
             count = c.fetch_latest_documents()
-            total += count
+            total += (count if count is not None else 0)
         except Exception as e:
-            print(f"  [!] Failed: {e}")
+            print(f"  [!] Failed {collector_class.__name__}: {e}")
 
-    # Phase 2: AI-Assisted Discovery (Optional logic can go here)
-    # For now, focus on stable growth.
-
-    # Phase 3: Indexing
-    print("\n[Phase 3] Rebuilding Master Index...")
+    # Phase 2: Indexing
+    print("\n[Phase 2] Rebuilding Master Index...")
     try:
         rebuild_index()
+        print("  [Success] master_index.json updated.")
     except Exception as e:
         print(f"  [!] Indexing Error: {e}")
 
-    print(f"\n=== Process Completed. New items found: {total} ===")
+    print(f"\n=== Process Completed. Total items processed: {total} ===")
 
 if __name__ == "__main__":
     main()
