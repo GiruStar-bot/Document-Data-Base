@@ -2,34 +2,38 @@ import os
 import sys
 from datetime import datetime
 
-# モジュール検索パスの追加
+# Add current dir to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from collectors.economic_collectors import STABLE_COLLECTORS
-from collectors.base_collector import GenericEconomicCollector
+from scripts.rebuild_index import rebuild_index
 
 def main():
-    print(f"=== Execution Start: {datetime.now().isoformat()} ===")
+    print(f"=== GiruStar Archive Engine: {datetime.now().isoformat()} ===")
     
-    # フェーズ1: 安定ソースの収集
-    print("\nPhase 1: Stable Collectors")
+    total = 0
+    # Phase 1: Direct Collection (Stable Sources)
+    print("\n[Phase 1] Processing Stable Sources...")
     for collector_class in STABLE_COLLECTORS:
         try:
             c = collector_class()
-            print(f"[*] Running {c.organization_name}...")
-            c.fetch_latest_documents()
+            print(f"[*] Running {c.organization_name} ({c.country_code})...")
+            count = c.fetch_latest_documents()
+            total += count
         except Exception as e:
-            print(f"[!] Failed stable collector {collector_class.__name__}: {e}")
+            print(f"  [!] Failed: {e}")
 
-    # フェーズ2: 目次の再構築 (独立スクリプトを呼び出す)
-    print("\nPhase 2: Indexing")
+    # Phase 2: AI-Assisted Discovery (Optional logic can go here)
+    # For now, focus on stable growth.
+
+    # Phase 3: Indexing
+    print("\n[Phase 3] Rebuilding Master Index...")
     try:
-        from scripts.rebuild_index import rebuild_index
         rebuild_index()
     except Exception as e:
-        print(f"[!] Critical error during index phase: {e}")
+        print(f"  [!] Indexing Error: {e}")
 
-    print("\n=== Execution Finished ===")
+    print(f"\n=== Process Completed. New items found: {total} ===")
 
 if __name__ == "__main__":
     main()
