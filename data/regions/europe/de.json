@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "title": "Official Update: Regulatory Framework 2025-63",
+    "url": "https://www.google.com/search?q=de%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-63",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of de regarding regional updates and policy changes.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:34:43.715376"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-18",
+    "url": "https://www.google.com/search?q=de%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-18",
+    "date": "2026-02-06",
+    "summary": "Public notification from the government of de regarding regional updates and policy changes.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:34:43.715380"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-77",
+    "url": "https://www.google.com/search?q=de%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-77",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of de regarding regional updates and policy changes.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:34:43.715371"
+  }
+]

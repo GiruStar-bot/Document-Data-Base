@@ -6,5 +6,21 @@
     "summary": "Public notification from the government of za regarding regional updates.",
     "status_level": "Critical",
     "collected_at": "2026-02-10T03:12:15.582032"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-30",
+    "url": "https://www.google.com/search?q=za%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-30",
+    "date": "2026-02-05",
+    "summary": "Public notification from the government of za regarding regional updates and policy changes.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:34:43.716730"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-50",
+    "url": "https://www.google.com/search?q=za%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-50",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of za regarding regional updates and policy changes.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:34:43.716736"
   }
 ]

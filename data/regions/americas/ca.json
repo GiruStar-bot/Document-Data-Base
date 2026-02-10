@@ -16,11 +16,27 @@
     "collected_at": "2026-02-10T03:12:15.580801"
   },
   {
+    "title": "Official Update: Regulatory Framework 2025-54",
+    "url": "https://www.google.com/search?q=ca%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-54",
+    "date": "2026-02-07",
+    "summary": "Public notification from the government of ca regarding regional updates and policy changes.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:34:43.716302"
+  },
+  {
     "title": "Official Update: Regulatory Framework 2024-26",
     "url": "https://gov.ca/announcements/33741",
     "date": "2026-02-03",
     "summary": "Public notification from the government of ca regarding regional updates.",
     "status_level": "Notice",
     "collected_at": "2026-02-10T03:12:15.580806"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-29",
+    "url": "https://www.google.com/search?q=ca%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-29",
+    "date": "2026-02-03",
+    "summary": "Public notification from the government of ca regarding regional updates and policy changes.",
+    "status_level": "Critical",
+    "collected_at": "2026-02-10T03:34:43.716296"
   }
 ]

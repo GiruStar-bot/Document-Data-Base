@@ -8,6 +8,14 @@
     "collected_at": "2026-02-10T03:12:15.575104"
   },
   {
+    "title": "Official Update: Regulatory Framework 2025-34",
+    "url": "https://www.google.com/search?q=in%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-34",
+    "date": "2026-02-08",
+    "summary": "Public notification from the government of in regarding regional updates and policy changes.",
+    "status_level": "Info",
+    "collected_at": "2026-02-10T03:34:43.713657"
+  },
+  {
     "title": "Official Update: Regulatory Framework 2025-18",
     "url": "https://gov.in/announcements/77186",
     "date": "2026-02-07",
@@ -22,5 +30,13 @@
     "summary": "Public notification from the government of in regarding regional updates.",
     "status_level": "Warning",
     "collected_at": "2026-02-10T03:12:15.575098"
+  },
+  {
+    "title": "Official Update: Regulatory Framework 2025-3",
+    "url": "https://www.google.com/search?q=in%20government%20Official%20Update%3A%20Regulatory%20Framework%202025-3",
+    "date": "2026-02-04",
+    "summary": "Public notification from the government of in regarding regional updates and policy changes.",
+    "status_level": "Notice",
+    "collected_at": "2026-02-10T03:34:43.713649"
   }
 ]
