@@ -1,5 +1,5 @@
 import requests
-from collectors.base import EconomicDocumentCollector
+from base_collector import EconomicDocumentCollector
 
 class IMFCollector(EconomicDocumentCollector):
     """
