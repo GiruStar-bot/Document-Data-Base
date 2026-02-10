@@ -1,25 +1,29 @@
-from collectors.economic_collectors import IMFCollector, JapanMOFCollector
+from collectors.economic_collectors import IMFCollector, JapanMOFCollector, USFedCollector
 
 def main():
     print("--- Economic Document Collection Started ---")
     
-    # クローラーのリスト
+    # 実行するクローラーのリストに USFedCollector を追加
     collectors = [
         IMFCollector(),
-        JapanMOFCollector()
-        # ここに米国FRB、欧州ECBなどを順次追加
+        JapanMOFCollector(),
+        USFedCollector()  # ← ここを追加！
     ]
     
-    # 実行
+    # 各クローラーを実行
     for collector in collectors:
         print(f"Processing: {collector.organization_name}...")
-        collector.fetch_latest_documents()
+        try:
+            collector.fetch_latest_documents()
+        except Exception as e:
+            print(f"Error in {collector.organization_name}: {e}")
         
-    # インデックス更新
+    # 最後に全てのデータを集約して master_index.json を作成
     print("Updating master index...")
-    IMFCollector().generate_master_index() # どのインスタンスから呼んでも全データを集約します
+    # どのコレクターを使っても generate_master_index は全データをスキャンします
+    IMFCollector().generate_master_index()
     
-    print("--- Done ---")
+    print("--- All processes completed successfully ---")
 
 if __name__ == "__main__":
     main()
