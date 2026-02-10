@@ -18,8 +18,8 @@ class GenericEconomicCollector:
         self.model = "gemini-2.5-flash-preview-09-2025"
         self.api_url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
         
-        # 基準ディレクトリを「リポジトリのルート」に固定
-        self.root_dir = os.getcwd()
+        # 基準ディレクトリ：このファイル(collectors/base_collector.py)の2つ上の階層がルート
+        self.root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         self.data_dir = os.path.join(self.root_dir, "data")
         self.save_dir = os.path.join(self.data_dir, country_code, organization_name)
         
@@ -49,7 +49,6 @@ class GenericEconomicCollector:
             if r.status_code == 200:
                 docs = json.loads(r.json()['candidates'][0]['content']['parts'][0]['text'])
                 for doc in docs:
-                    # タイトルからファイル名に使用できない文字を除去
                     safe_title = "".join(x for x in doc.get('title', 'doc') if x.isalnum())[:20]
                     doc_id = f"{safe_title}_{int(time.time())}"
                     self.save_metadata(doc_id, doc)
@@ -73,22 +72,22 @@ class GenericEconomicCollector:
     @staticmethod
     def generate_master_index():
         """
-        静的メソッドとして定義し、全JSONを集約します。
+        data/ フォルダ内の全JSONを集約します。
+        絶対パスを使用して、確実にルートの data フォルダをスキャンします。
         """
-        root_dir = os.getcwd()
+        # ルートディレクトリを取得 (base_collector.py から見て2つ上)
+        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         data_dir = os.path.join(root_dir, "data")
         all_data = []
         
-        print(f"  [Index] Starting scan in: {data_dir}")
+        print(f"  [Index] Scanning absolute path: {data_dir}")
         
         if not os.path.exists(data_dir):
-            print(f"  [Error] Data directory not found at {data_dir}")
+            print(f"  [Error] Data directory NOT FOUND at {data_dir}")
             return
 
-        # フォルダ内を再帰的に探索
         for root, _, files in os.walk(data_dir):
             for file in files:
-                # master_index.json と status.json は除外
                 if file.endswith(".json") and file not in ["master_index.json", "status.json"]:
                     file_path = os.path.join(root, file)
                     try:
@@ -100,11 +99,12 @@ class GenericEconomicCollector:
                         print(f"  [Skip] Failed to load {file}: {e}")
 
         # 日付で降順ソート
-        all_data.sort(key=lambda x: str(x.get("date", "")), reverse=True)
+        all_data.sort(key=lambda x: str(x.get("date", "0000-00-00")), reverse=True)
 
-        # 書き出し
+        # インデックスの保存
         index_path = os.path.join(data_dir, "master_index.json")
         with open(index_path, "w", encoding="utf-8") as f:
             json.dump(all_data, f, ensure_ascii=False, indent=4)
         
-        print(f"  [Success] Master index updated with {len(all_data)} items at {index_path}")
+        print(f"  [Success] master_index.json updated. Total items: {len(all_data)}")
+        print(f"  [Path] Saved to: {index_path}")
