@@ -14,8 +14,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # 履歴をすべて取得して競合を防ぐ
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,20 +23,19 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run Data Collection
+      - name: Run Collection and Indexing
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python main.py
+
+      - name: Emergency Indexing (Fallback)
+        # もし main.py が途中でクラッシュしても、これだけは単独で実行して目次を作る
+        if: always() 
+        run: python scripts/rebuild_index.py
 
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # data フォルダと collectors フォルダを明示的に追加
-          git add data/*.json
-          git add data/**/*.json
-          git add collectors/registry.json
-          
-          # 変更がある場合のみコミット。--allow-empty は使わず確実に検知させる。
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: Discoveries and Index Rebuild" && git push origin main)
+          git add data/ collectors/ scripts/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: Data & Index" && git push origin main)
