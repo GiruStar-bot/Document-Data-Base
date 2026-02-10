@@ -1,75 +1,77 @@
-import json
 import os
+import json
+import requests
 from pathlib import Path
 from collectors.sources.real_collectors import JapanEgovCollector, USFederalRegisterCollector
 from collectors.sources.pdf_analyzer import PDFAnalyzer
 
-def process_pdfs_and_update_index():
-    """
-    data/pdfs フォルダ内のPDFをスキャンし、AIで分析してインデックスを更新する。
-    """
-    print("--- AI Document Analysis Started ---")
-    
-    # APIキーはGitHub ActionsのSecretsから取得することを想定
+def download_file(url, target_path):
+    """ファイルをリポジトリ内に保存"""
+    if target_path.exists():
+        return True
+    try:
+        r = requests.get(url, timeout=30, stream=True)
+        r.raise_for_status()
+        with open(target_path, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                f.write(chunk)
+        return True
+    except:
+        return False
+
+def main():
+    print("--- Start AI Document Pipeline ---")
     api_key = os.environ.get("GEMINI_API_KEY", "")
     analyzer = PDFAnalyzer(api_key)
     
+    # 1. 各国のデータ取得
+    collectors = [JapanEgovCollector(), USFederalRegisterCollector()]
     pdf_dir = Path("data/pdfs")
     pdf_dir.mkdir(parents=True, exist_ok=True)
-    
-    analysis_results = {}
-    
-    # 1. 既存のPDFをスキャン
-    for pdf_path in pdf_dir.glob("*.pdf"):
-        print(f"Analyzing {pdf_path.name}...")
-        analysis = analyzer.analyze_pdf(pdf_path)
-        analysis_results[pdf_path.name] = analysis
 
-    # 2. グローバルインデックスの生成（AI分析結果を統合）
-    generate_global_index(analysis_results)
-
-def generate_global_index(ai_metadata):
-    regions_path = Path("data/regions")
-    global_index = []
-
-    # 既存のJSONデータを読み込む
-    for country_file in regions_path.rglob("*.json"):
-        try:
-            with open(country_file, "r", encoding="utf-8") as f:
-                docs = json.load(f)
-                for doc in docs:
-                    # PDFファイル名との紐付け（URLの末尾などを利用）
-                    filename = doc['url'].split('/')[-1] + ".pdf"
-                    if filename in ai_metadata:
-                        doc.update(ai_metadata[filename])
-                        doc["has_pdf"] = True
-                        doc["pdf_path"] = f"data/pdfs/{filename}"
-                    else:
-                        doc["has_pdf"] = False
-                    
-                    doc["country_code"] = country_file.stem
-                    doc["region"] = country_file.parent.name
-                    global_index.append(doc)
-        except Exception as e:
-            print(f"Error reading {country_file}: {e}")
-
-    global_index.sort(key=lambda x: x["date"], reverse=True)
-
-    output_path = Path("data/current")
-    output_path.mkdir(parents=True, exist_ok=True)
-    with open(output_path / "global-index.json", "w", encoding="utf-8") as f:
-        json.dump(global_index, f, ensure_ascii=False, indent=2)
-
-def main():
-    # 1. 実データ取得
-    collectors = [JapanEgovCollector(), USFederalRegisterCollector()]
     for c in collectors:
+        print(f"Collecting: {c.country_code}...")
         data = c.fetch()
         c.save_data(data)
+        
+        # 資料の実体(PDFなど)があればダウンロード
+        for item in data:
+            # URLがPDFを指している、または官報のようにPDF取得が期待される場合
+            if ".pdf" in item["url"].lower() or "federalregister" in item["url"]:
+                fname = f"{item['date']}_{item['country_code']}_{hash(item['url'])}.pdf"
+                target = pdf_dir / fname
+                if download_file(item["url"], target):
+                    item["pdf_local_path"] = f"data/pdfs/{fname}"
+
+    # 2. PDFのAI分析とグローバルインデックス統合
+    regions_path = Path("data/regions")
+    global_index = []
     
-    # 2. PDF分析とインデックス統合
-    process_pdfs_and_update_index()
-    print("--- All processes complete ---")
+    for json_file in regions_path.rglob("*.json"):
+        with open(json_file, "r", encoding="utf-8") as f:
+            docs = json.load(f)
+            for doc in docs:
+                doc["country_code"] = json_file.stem
+                doc["region"] = json_file.parent.name
+                
+                # PDFがあればAIで分析
+                if "pdf_local_path" in doc:
+                    pdf_path = Path(doc["pdf_local_path"])
+                    if pdf_path.exists():
+                        print(f"Analyzing PDF: {pdf_path.name}")
+                        analysis = analyzer.analyze(pdf_path)
+                        doc.update(analysis)
+                
+                global_index.append(doc)
+
+    # 3. 最新順に保存
+    global_index.sort(key=lambda x: x["date"], reverse=True)
+    out_dir = Path("data/current")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with open(out_dir / "global-index.json", "w", encoding="utf-8") as f:
+        json.dump(global_index, f, ensure_ascii=False, indent=2)
+
+    print(f"Pipeline complete. Total docs: {len(global_index)}")
 
 if __name__ == "__main__":
     main()
